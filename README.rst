@@ -14,6 +14,9 @@
    :target: https://pypi.python.org/pypi/serenata_toolbox/
    :alt: Latest PyPI version
 
+.. image:: https://codeclimate.com/github/lorn/serenata-toolbox/badges/gpa.svg
+   :target: https://codeclimate.com/github/lorn/serenata-toolbox
+   :alt: Code Climate
 
 
 Serenata de Amor Toolbox
