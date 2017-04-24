@@ -1,3 +1,9 @@
 *.egg-info/
 *.pyc
 __pycache__/
+*.pyc
+.coverage
+.python-version
+__pycache__/
+htmlcov/
+
