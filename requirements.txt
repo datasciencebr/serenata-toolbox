@@ -1,0 +1,6 @@
+aiofiles
+aiohttp
+beautifulsoup4>=4.4
+lxml>=3.6
+pandas>=0.18
+tqdm>=4.11.2
