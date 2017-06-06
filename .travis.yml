@@ -6,8 +6,10 @@ env:
   - TEST_SUITE=unit
   - TEST_SUITE=journey
 python: 3.5
+cache: pip
 install:
-  - python setup.py develop
+  - pip install -U pip wheel
+  - pip install --requirement=$TRAVIS_BUILD_DIR/requirements.txt
   - pip install coveralls
 script: coverage run -m unittest discover tests/$TEST_SUITE
 after_success: coveralls
