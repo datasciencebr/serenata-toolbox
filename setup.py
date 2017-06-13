@@ -21,8 +21,8 @@ setup(
         'beautifulsoup4>=4.4',
         'lxml>=3.6',
         'pandas>=0.18',
-        'tqdm',
-        'pytest>3.1'
+        'pytest>3.1',
+        'tqdm'
     ],
     keywords='serenata de amor, data science, brazil, corruption',
     license='MIT',
