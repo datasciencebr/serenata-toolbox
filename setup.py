@@ -14,6 +14,7 @@ setup(
     ],
     description='Toolbox for Serenata de Amor project',
     zip_safe=False,
+    setup_requires=['pytest-runner'],
     install_requires=[
         'aiofiles',
         'aiohttp',
@@ -23,7 +24,6 @@ setup(
         'pandas>=0.18',
         'tqdm'
     ],
-    test_suite="tests.unit",
     tests_require=[
         'pytest>3.1'
     ],
