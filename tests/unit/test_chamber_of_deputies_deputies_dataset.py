@@ -5,6 +5,7 @@ import numpy as np
 
 from serenata_toolbox.chamber_of_deputies.deputies_dataset import DeputiesDataset
 
+
 class TestDeputiesDataset(TestCase):
     def setUp(self):
         self.subject = DeputiesDataset()
@@ -29,6 +30,3 @@ class TestDeputiesDataset(TestCase):
         expectedConditions = ['Holder', 'Substitute']
         actualConditions = df.condition.unique()
         self.assertTrue((np.array(expectedConditions) == np.array(actualConditions)).all())
-
-if __name__ == '__main__':
-    main()

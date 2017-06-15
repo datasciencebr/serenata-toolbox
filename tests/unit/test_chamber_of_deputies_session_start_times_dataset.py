@@ -7,6 +7,7 @@ import numpy as np
 
 from serenata_toolbox.chamber_of_deputies.session_start_times_dataset import SessionStartTimesDataset
 
+
 class TestSpeechesDataset(TestCase):
     def setUp(self):
         self.subject = SessionStartTimesDataset()
@@ -27,6 +28,3 @@ class TestSpeechesDataset(TestCase):
         ]
         self.assertTrue((np.array(expectedColumns) == np.array(actualColumns)).all())
         self.assertEqual(4, len(df))
-
-if __name__ == '__main__':
-    main()

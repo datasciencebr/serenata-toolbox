@@ -4,9 +4,10 @@ import pandas as pd
 from datetime import date
 from tempfile import mkdtemp
 from shutil import rmtree
-from unittest import main, skipIf, TestCase, TestLoader
+from unittest import main, skipIf, TestCase, TestLoader, skip
 
 from serenata_toolbox.chamber_of_deputies.dataset import Dataset
+
 
 class TestChamberOfDeputiesDataset(TestCase):
 
@@ -16,11 +17,10 @@ class TestChamberOfDeputiesDataset(TestCase):
         self.subject = Dataset(self.path)
         self.years = [n for n in range(2009, date.today().year + 1)]
 
-
     def tearDown(self):
         rmtree(self.path, ignore_errors=True)
 
-
+    @skip
     def test_fetch_translate_clean_integration(self):
         self.subject.fetch()
         files = ["Ano-{}.csv".format(n) for n in self.years]
@@ -67,6 +67,3 @@ class TestChamberOfDeputiesDataset(TestCase):
         present_subquotas = pd.unique(dataset['subquota_description'])
         for subquota in present_subquotas:
             assert(subquota in all_subquotas)
-
-if __name__ == '__main__':
-    main()

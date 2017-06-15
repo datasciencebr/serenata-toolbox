@@ -6,6 +6,7 @@ import pandas as pd
 
 from serenata_toolbox.chamber_of_deputies.presences_dataset import PresencesDataset
 
+
 class TestPresencesDataset(TestCase):
     def setUp(self):
         self.deputies = pd.DataFrame([
@@ -30,6 +31,3 @@ class TestPresencesDataset(TestCase):
         ]
         self.assertTrue((np.array(expectedColumns) == np.array(actualColumns)).all())
         self.assertEqual(6, len(df))
-
-if __name__ == '__main__':
-    main()
