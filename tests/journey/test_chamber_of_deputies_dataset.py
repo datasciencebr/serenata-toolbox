@@ -19,7 +19,6 @@ class TestChamberOfDeputiesDataset(TestCase):
     def tearDown(self):
         rmtree(self.path, ignore_errors=True)
 
-    @skip
     def test_fetch_translate_clean_integration(self):
         self.subject.fetch()
         files = ["Ano-{}.csv".format(n) for n in self.years]

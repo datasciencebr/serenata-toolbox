@@ -1,6 +1,6 @@
 import os
 from tempfile import gettempdir
-from unittest import TestCase, skip
+from unittest import TestCase
 
 from serenata_toolbox.federal_senate.dataset import Dataset
 
@@ -10,7 +10,6 @@ class TestJourneyFederalSenateDataset(TestCase):
         self.path = gettempdir()
         self.subject = Dataset(self.path)
 
-    @skip
     def test_journey_federal_senate_dataset(self):
         # fetch_saves_raw_files
         self.subject.fetch()
