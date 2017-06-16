@@ -1,10 +1,9 @@
 import os
-import glob
 import pandas as pd
 from datetime import date
 from tempfile import mkdtemp
 from shutil import rmtree
-from unittest import main, skipIf, TestCase, TestLoader, skip
+from unittest import TestCase
 
 from serenata_toolbox.chamber_of_deputies.dataset import Dataset
 
