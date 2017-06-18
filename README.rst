@@ -110,7 +110,14 @@ Always add tests to your contribution — if you want to test it locally before
 
 ::
 
-  $ python -m unittest discover tests
+  # Run all tests
+  $ python setup.py test
+
+  # Run all unit tests
+  $ pytest tests/unit
+
+  # Run all journey tests
+  $ pytest tests/journey
 
 When the tests are passing, also check for coverage of the modules you edited or added — if you want to check it before opening the PR:
 
