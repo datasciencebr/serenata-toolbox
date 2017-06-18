@@ -124,7 +124,7 @@ When the tests are passing, also check for coverage of the modules you edited or
 ::
 
   $ pip install coverage
-  $ coverage run -m unittest discover tests
+  $ coverage run ./setup.py test
   $ coverage html
   $ open htmlcov/index.html
 
