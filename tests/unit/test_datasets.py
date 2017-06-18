@@ -1,6 +1,6 @@
 import os
 from unittest import TestCase
-from unittest.mock import call, patch, MagicMock
+from unittest.mock import call, patch
 
 from serenata_toolbox.datasets import Datasets, fetch, fetch_latest_backup
 

@@ -1,5 +1,4 @@
-import os
-from unittest import main, skipIf, TestCase
+from unittest import TestCase
 
 import numpy as np
 
@@ -10,8 +9,6 @@ class TestDeputiesDataset(TestCase):
     def setUp(self):
         self.subject = DeputiesDataset()
 
-    @skipIf(os.environ.get('RUN_INTEGRATION_TESTS') != '1',
-            'Skipping integration test')
     def test_fetch(self):
         df = self.subject.fetch()
         actualColumns = df.columns

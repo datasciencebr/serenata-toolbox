@@ -1,16 +1,14 @@
-import os
-from unittest import main, skipIf, TestCase
+from unittest import TestCase
 
 import numpy as np
 
 from serenata_toolbox.chamber_of_deputies.speeches_dataset import SpeechesDataset
 
+
 class TestSpeechesDataset(TestCase):
     def setUp(self):
         self.subject = SpeechesDataset()
 
-    @skipIf(os.environ.get('RUN_INTEGRATION_TESTS') != '1',
-            'Skipping integration test')
     def test_fetch(self):
         df = self.subject.fetch('03/02/2015', '03/02/2015')
         actualColumns = df.columns
@@ -23,6 +21,3 @@ class TestSpeechesDataset(TestCase):
         ]
         self.assertTrue((np.array(expectedColumns) == np.array(actualColumns)).all())
         self.assertEqual(208, len(df))
-
-if __name__ == '__main__':
-    main()
