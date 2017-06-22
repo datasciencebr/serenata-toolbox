@@ -6,5 +6,5 @@ python: 3.5
 install:
   - python setup.py develop
   - pip install coveralls
-script: travis_wait 40 coverage run ./setup.py test
+script: travis_wait 40 coverage run setup.py test
 after_success: coveralls
