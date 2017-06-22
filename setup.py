@@ -14,6 +14,7 @@ setup(
     ],
     description='Toolbox for Serenata de Amor project',
     zip_safe=False,
+    setup_requires=['pytest-runner'],
     install_requires=[
         'aiofiles',
         'aiohttp',
@@ -22,6 +23,9 @@ setup(
         'lxml>=3.6',
         'pandas>=0.18',
         'tqdm'
+    ],
+    tests_require=[
+        'pytest>3.1'
     ],
     keywords='serenata de amor, data science, brazil, corruption',
     license='MIT',

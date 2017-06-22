@@ -28,7 +28,8 @@ class TestFederalSenateDataset(TestCase):
 
             self.assertIn(expected_file, retrieved_file)
 
-    def test_fetch_not_found_files_from_S3(self):
+    @patch('serenata_toolbox.federal_senate.dataset.urlretrieve')
+    def test_fetch_not_found_files_from_S3(self, mocked_url_etrieve):
         self.path = gettempdir()
         self.subject = Dataset(self.path, 2007, 2008)
 

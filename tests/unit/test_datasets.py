@@ -1,6 +1,6 @@
 import os
 from unittest import TestCase
-from unittest.mock import call, patch, MagicMock
+from unittest.mock import call, patch
 
 from serenata_toolbox.datasets import Datasets, fetch, fetch_latest_backup
 
@@ -66,12 +66,6 @@ class TestDatasets(TestCase):
 
 
 class TestFetch(TestCase):
-
-    @patch('serenata_toolbox.datasets.Datasets')
-    def test_fetch(self, datasets):
-        fetch('file.xz', 'test')
-        datasets.assert_called_once_with('test')
-        datasets.return_value.downloader.download.assert_called_once_with('file.xz')
 
     @patch('serenata_toolbox.datasets.Datasets')
     def test_fetch(self, datasets):
