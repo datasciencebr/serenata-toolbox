@@ -110,6 +110,8 @@ Always add tests to your contribution — if you want to test it locally before
 
 ::
 
+  $ pip install pytest
+
   # Run all tests
   $ python setup.py test
 
