@@ -1,0 +1,15 @@
+{
+  "Cidades": {
+    "-count": "2",
+    "Cidade": [
+      {
+        "Nome": "São Paulo",
+        "CidadeKey": "500"
+      },
+      {
+        "Nome": "São Paulo",
+        "CidadeKey": "500"
+      }
+    ]
+  }
+}
