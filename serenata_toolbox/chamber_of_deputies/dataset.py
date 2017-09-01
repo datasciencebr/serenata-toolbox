@@ -112,17 +112,38 @@ class Dataset:
             .replace('.csv', '.xz') \
             .replace('Ano-', 'reimbursements-')
 
-        data = pd.read_csv(csv_path,
-                           encoding='utf-8',
-                           delimiter=";",
-                           quoting=csv.QUOTE_NONE,
-                           dtype={'ideDocumento': np.str,
-                                  'idecadastro': np.str,
-                                  'nuCarteiraParlamentar': np.str,
-                                  'codLegislatura': np.str,
-                                  'txtCNPJCPF': np.str,
-                                  'numRessarcimento': np.str},
-                           )
+        strings = (
+            'codLegislatura',
+            'ideDocumento',
+            'idecadastro',
+            'nuCarteiraParlamentar',
+            'numRessarcimento'
+            'txtCNPJCPF',
+            'txtDescricaoEspecificacao',
+            'vlrRestituicao'  # raises warning if directly coerced to float
+        )
+        floats = (
+            'vlrDocumento',
+            'vlrGlosa',
+            'vlrLiquido',
+        )
+        dtype = {key: np.str for key in strings}
+        dtype.update({key: np.float for key in floats})
+        kwargs = dict(
+            encoding='utf-8',
+            delimiter=';',
+            quoting=csv.QUOTE_NONE,
+            decimal=',',
+            dtype=dtype
+        )
+
+        data = pd.read_csv(csv_path, **kwargs)
+
+        data['vlrRestituicao'] = pd.to_numeric(
+            data['vlrRestituicao'],
+            errors='coerce',
+            downcast='float'
+        )  # raises warning if directly coerced to float on dtype
 
         data.rename(columns=self.translate_columns, inplace=True)
 
