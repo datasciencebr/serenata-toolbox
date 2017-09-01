@@ -71,11 +71,11 @@ class Dataset:
         }
 
     def fetch(self):
-        base_url = "http://www.camara.leg.br/cotas/Ano-{}.csv.zip"
+        base_url = 'http://www.camara.leg.br/cotas/Ano-{}.csv.zip'
         retrieved_files = []
 
         for year in self.years:
-            zip_file_path = os.path.join(self.path, "Ano-{}.zip".format(year))
+            zip_file_path = os.path.join(self.path, 'Ano-{}.zip'.format(year))
             url = base_url.format(year)
             urlretrieve(url, zip_file_path)
             retrieved_files.append(zip_file_path)
