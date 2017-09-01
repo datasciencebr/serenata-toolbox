@@ -75,6 +75,7 @@ class Dataset:
         retrieved_files = []
 
         for year in self.years:
+            print('Downloading dataset from {}…'.format(year))
             zip_file_path = os.path.join(self.path, 'Ano-{}.zip'.format(year))
             url = base_url.format(year)
             urlretrieve(url, zip_file_path)
@@ -91,6 +92,7 @@ class Dataset:
         return retrieved_files
 
     def _extract_zip_file(self, zip_file_path):
+        print('Extracting {}…'.format(zip_file_path))
         zip_file = ZipFile(zip_file_path, 'r')
         zip_file.extractall(self.path)
         zip_file.close()
@@ -99,6 +101,7 @@ class Dataset:
 
     def translate(self):
         for year in self.years:
+            print('Translating dataset from {}…'.format(year))
             csv_path = os.path.join(self.path, 'Ano-{}.csv'.format(year))
             self._translate_file(csv_path)
 
@@ -137,6 +140,7 @@ class Dataset:
             dtype=dtype
         )
 
+        print('Cleaning {}…'.format(csv_path))
         data = pd.read_csv(csv_path, **kwargs)
 
         data['vlrRestituicao'] = pd.to_numeric(
