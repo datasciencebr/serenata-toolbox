@@ -71,11 +71,12 @@ class Dataset:
         }
 
     def fetch(self):
-        base_url = "http://www.camara.leg.br/cotas/Ano-{}.csv.zip"
+        base_url = 'http://www.camara.leg.br/cotas/Ano-{}.csv.zip'
         retrieved_files = []
 
         for year in self.years:
-            zip_file_path = os.path.join(self.path, "Ano-{}.zip".format(year))
+            print('Downloading dataset from {}…'.format(year))
+            zip_file_path = os.path.join(self.path, 'Ano-{}.zip'.format(year))
             url = base_url.format(year)
             urlretrieve(url, zip_file_path)
             retrieved_files.append(zip_file_path)
@@ -91,6 +92,7 @@ class Dataset:
         return retrieved_files
 
     def _extract_zip_file(self, zip_file_path):
+        print('Extracting {}…'.format(zip_file_path))
         zip_file = ZipFile(zip_file_path, 'r')
         zip_file.extractall(self.path)
         zip_file.close()
@@ -99,6 +101,7 @@ class Dataset:
 
     def translate(self):
         for year in self.years:
+            print('Translating dataset from {}…'.format(year))
             csv_path = os.path.join(self.path, 'Ano-{}.csv'.format(year))
             self._translate_file(csv_path)
 
@@ -112,17 +115,39 @@ class Dataset:
             .replace('.csv', '.xz') \
             .replace('Ano-', 'reimbursements-')
 
-        data = pd.read_csv(csv_path,
-                           encoding='utf-8',
-                           delimiter=";",
-                           quoting=csv.QUOTE_NONE,
-                           dtype={'ideDocumento': np.str,
-                                  'idecadastro': np.str,
-                                  'nuCarteiraParlamentar': np.str,
-                                  'codLegislatura': np.str,
-                                  'txtCNPJCPF': np.str,
-                                  'numRessarcimento': np.str},
-                           )
+        strings = (
+            'codLegislatura',
+            'ideDocumento',
+            'idecadastro',
+            'nuCarteiraParlamentar',
+            'numRessarcimento'
+            'txtCNPJCPF',
+            'txtDescricaoEspecificacao',
+            'vlrRestituicao'  # raises warning if directly coerced to float
+        )
+        floats = (
+            'vlrDocumento',
+            'vlrGlosa',
+            'vlrLiquido',
+        )
+        dtype = {key: np.str for key in strings}
+        dtype.update({key: np.float for key in floats})
+        kwargs = dict(
+            encoding='utf-8',
+            delimiter=';',
+            quoting=csv.QUOTE_NONE,
+            decimal=',',
+            dtype=dtype
+        )
+
+        print('Cleaning {}…'.format(csv_path))
+        data = pd.read_csv(csv_path, **kwargs)
+
+        data['vlrRestituicao'] = pd.to_numeric(
+            data['vlrRestituicao'],
+            errors='coerce',
+            downcast='float'
+        )  # raises warning if directly coerced to float on dtype
 
         data.rename(columns=self.translate_columns, inplace=True)
 
