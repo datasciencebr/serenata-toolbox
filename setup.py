@@ -26,6 +26,14 @@ setup(
         'python-decouple>=3.1',
         'tqdm'
     ],
+    extras_require={
+        'dev': [
+            "isort",
+            "prospector",
+            "pytest",
+            "pytest-cov"
+        ]
+    },
     keywords='serenata de amor, data science, brazil, corruption',
     license='MIT',
     long_description=long_description,
@@ -39,5 +47,5 @@ setup(
     scripts=['serenata_toolbox/serenata-toolbox'],
     url=REPO_URL,
     python_requires='>=3.6',
-    version='15.1.0',
+    version='15.1.1',
 )

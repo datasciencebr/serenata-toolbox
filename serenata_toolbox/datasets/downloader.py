@@ -75,7 +75,10 @@ class Downloader:
             return
 
         loop = asyncio.get_event_loop()
-        loop.run_until_complete(self.main(loop, files))
+        if loop.is_running():
+            loop.create_task(self.main(loop, files))
+        else:
+            loop.run_until_complete(self.main(loop, files))
 
     async def main(self, loop, files):
         desc = 'Downloading {} files'.format(len(files))

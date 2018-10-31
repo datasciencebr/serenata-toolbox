@@ -62,7 +62,7 @@ class TestDownloader(TestCase):
         downloader.download('test.xz')
         asyncio_.get_event_loop.assert_called_with()
         loop = asyncio_.get_event_loop.return_value
-        self.assertTrue(loop.run_until_complete.called)
+        self.assertTrue(loop.create_task.called)
         main.assert_called_once_with(loop, ('test.xz',))
 
     @patch.object(Downloader, 'main')
@@ -76,7 +76,7 @@ class TestDownloader(TestCase):
         downloader.download(range(3))
         asyncio_.get_event_loop.assert_called_with()
         loop = asyncio_.get_event_loop.return_value
-        self.assertTrue(loop.run_until_complete.called)
+        self.assertTrue(loop.create_task.called)
         main.assert_called_once_with(loop, (1, 2))
 
     @patch('serenata_toolbox.datasets.downloader.os.path.isdir')

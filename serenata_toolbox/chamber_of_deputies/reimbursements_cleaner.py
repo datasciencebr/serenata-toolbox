@@ -141,8 +141,9 @@ class ReimbursementsCleaner:
     def aggregate_multiple_payments(self):
         self.data = pd.concat([
             self._house_payments(),
-            self._non_house_payments(),
-        ])
+            self._non_house_payments()],
+            sort=True,
+        )
 
     def save(self):
         file_path = os.path.join(self.path, f'reimbursements-{self.year}.csv')
